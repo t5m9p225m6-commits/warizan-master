@@ -1,0 +1,338 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="見て、動かして、九九につなげる。等分除・包含除・あまりを学べる、登録不要のわり算練習アプリ。"><meta name="theme-color" content="#2563eb"><title>わりざんマスター｜正式版</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef6ff;color:#20304a;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}main{max-width:820px;margin:auto;padding:10px}.card{background:#fff;border-radius:22px;padding:14px;box-shadow:0 6px 22px #23375a1f}h1{text-align:center;margin:2px;font-size:29px}.sub{text-align:center;color:#64748b;margin:2px 0 9px}.row,.tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}.pill{background:#e8f2ff;border-radius:99px;padding:7px 10px;font-weight:800}button{border:0;border-radius:14px;min-height:50px;padding:9px 11px;font-size:16px;font-weight:900;touch-action:manipulation;cursor:pointer}.tabs button{background:#dbeafe}.on{outline:4px solid #93c5fd}.blue{background:#2563eb;color:#fff}.yellow{background:#fde68a}.green{background:#dcfce7}.soft{background:#dbeafe}.purple{background:#ede9fe}.orange{background:#ffedd5}.story{text-align:center;font-size:18px;min-height:48px;margin:10px 0 0;line-height:1.45}.problem{text-align:center;font-size:44px;font-weight:900;margin:6px}.visual{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;min-height:52px}.group{border:2px solid #93c5fd;border-radius:11px;padding:5px}.left{border-style:dashed;border-color:#f59e0b}.dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:#60a5fa;margin:2px}.left .dot{background:#fbbf24}.answer{text-align:center;margin:7px}.answer input{width:92px;font-size:31px;text-align:center;border:3px solid #94a3b8;border-radius:11px}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}.msg{text-align:center;font-size:19px;font-weight:900;min-height:52px;padding:7px}.progress{height:12px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:8px 0}.bar{height:100%;background:#60a5fa;width:0}.panel{background:#f8fafc;border-radius:14px;padding:10px;margin-top:9px}.town{text-align:center;font-size:27px;min-height:37px}.badges{text-align:center;font-size:23px}.small{font-size:13px;color:#64748b;line-height:1.5}.challenge{font-weight:800;text-align:center;margin:4px}
+.lab{display:none;background:#f0fdf4;border:2px solid #bbf7d0;border-radius:16px;padding:10px;margin:8px 0;overscroll-behavior:contain}.lab.dragmode{touch-action:none}.lab.dragmode *{touch-action:none!important}.modeNotice{text-align:center;font-weight:900;padding:7px;border-radius:10px;background:#fff7ed;margin:6px 0}.lab.show{display:block}.labTitle{text-align:center;font-weight:900;margin-bottom:7px}.tray{min-height:68px;background:#fff;border:2px dashed #94a3b8;border-radius:13px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}.piece{width:38px;height:38px;border-radius:50%;background:#60a5fa;border:0;padding:0;min-height:38px;font-size:0;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;user-select:none;cursor:grab}.piece.dragging{position:fixed;z-index:9999;pointer-events:none;transform:scale(1.15);box-shadow:0 5px 15px #0004;cursor:grabbing}.piece.used{opacity:.18}.piece.selected{outline:5px solid #f59e0b;outline-offset:3px;transform:scale(1.08)}.inpiece{display:inline-block;width:22px;height:22px;border-radius:50%;background:#60a5fa;margin:2px}.bucket.drop,.bucket.selectTarget{background:#dbeafe;border-color:#2563eb;transform:scale(1.03)}.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:7px;margin-top:8px}.bucket{background:#fff;border:2px solid #93c5fd;border-radius:13px;min-height:82px;padding:6px;text-align:center;font-weight:800;transition:.12s}.bucketDots{min-height:28px}.bucket .count{font-size:22px}.labBtns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}footer{text-align:center;font-size:12px;color:#64748b;margin:9px}
+@media(max-width:480px){.problem{font-size:39px}.story{font-size:16px}.card{padding:10px}.piece{width:36px;height:36px}}
+.groupLab{display:none;background:#fff7ed;border:2px solid #fed7aa;border-radius:16px;padding:10px;margin:8px 0}.groupLab.show{display:block}.groupSlots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}.groupSlot{min-width:88px;min-height:76px;background:#fff;border:2px dashed #fb923c;border-radius:14px;padding:7px;text-align:center;font-weight:900}.groupSlot.full{border-style:solid;background:#ffedd5}.groupHint{text-align:center;font-weight:900;margin:6px}.groupPieces{min-height:66px;background:#fff;border:2px dashed #94a3b8;border-radius:13px;padding:8px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}.gp{width:38px;height:38px;border-radius:50%;background:#60a5fa;border:0;min-height:38px;padding:0;touch-action:manipulation}.gp.sel{outline:5px solid #f59e0b;outline-offset:2px}.groupDone{text-align:center;font-size:20px;font-weight:900;padding:7px}
+.bridge{display:none;background:#f5f3ff;border:2px solid #c4b5fd;border-radius:16px;padding:12px;margin:10px 0}
+.bridge.show{display:block}.bridge h2{font-size:20px;text-align:center;margin:3px}
+.bridgeQ{font-size:18px;font-weight:900;text-align:center;line-height:1.6}
+.bridgeBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.bridgeMsg{text-align:center;font-weight:900;min-height:32px;margin-top:7px}
+.bridgeFlow{text-align:center;font-size:15px;color:#475569;margin-top:6px}
+
+.supportPanel{display:none;background:#eff6ff;border:2px solid #93c5fd;border-radius:16px;padding:11px;margin:9px 0}
+.supportPanel.show{display:block}.supportTitle{text-align:center;font-size:19px;font-weight:900}
+.supportText{text-align:center;font-weight:800;margin:6px 0;line-height:1.5}
+.supportBtns{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+@media(max-width:560px){.supportBtns{grid-template-columns:1fr}}
+.supportTag{text-align:center;font-size:13px;color:#475569;margin-top:6px}
+
+.adaptPanel{background:#f8fafc;border:2px solid #e2e8f0;border-radius:15px;padding:10px;margin-top:9px}
+.adaptTitle{text-align:center;font-weight:900}.adaptGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
+.adaptCell{background:white;border-radius:11px;padding:7px;text-align:center;font-size:13px}
+@media(max-width:520px){.adaptGrid{grid-template-columns:1fr 1fr}}
+
+[hidden]{display:none!important}
+body{background:radial-gradient(ellipse at 12% 4%,#fff6cc 0,transparent 38%),radial-gradient(ellipse at 95% 32%,#dbeafe 0,transparent 46%),#eff7ff;line-height:1.55}
+main{max-width:880px;padding:22px 16px 32px}.card{padding:24px;border:1px solid #d9e7f5;box-shadow:0 12px 35px #25477712}
+h1{letter-spacing:.03em;font-size:clamp(24px,4vw,34px)}.sub{margin:4px 0 18px;color:#52657b}
+button{font-family:inherit;box-shadow:0 3px 0 #142d4920;transition:background .15s,transform .15s;line-height:1.4}
+button:hover{filter:brightness(.97)}button:active{transform:translateY(2px);box-shadow:none}button:disabled{opacity:.65;cursor:default}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #7c3aed;outline-offset:4px}
+.tabs{margin:16px 0;gap:9px}.tabs button{font-size:14px;min-height:46px;flex:1 1 22%;color:#20304a}
+.tabs #adaptive{order:-1;flex:1 1 100%;background:#2563eb;color:white;font-size:21px;min-height:58px;border-radius:18px}
+.tabs button.on{background:#bfdbfe;outline:2px solid #2563eb;outline-offset:1px}
+.steps{display:flex;justify-content:space-around;gap:4px;padding:8px 3px;color:#52657b;background:#f1f5f9;border-radius:12px;font-size:13px;font-weight:800}
+.story{margin-top:18px}.problem{font-size:clamp(32px,7vw,48px);line-height:1.5}.visual{max-width:540px;margin:10px auto 16px;gap:3px;min-height:24px}
+.dot{width:15px;height:15px}.answer{margin:18px 0}.answer input{width:88px;min-height:52px;background:#fff;color:#20304a}.answer label{font-weight:800}
+.buttons button{min-height:52px}.msg{color:#174e6c;line-height:1.6}.panel{border:1px solid #e2e8f0}.small{color:#52657b}
+.piece,.gp{min-width:44px;min-height:44px;width:44px;height:44px}.piece{touch-action:manipulation}.lab.dragmode{touch-action:auto}.lab.dragmode *{touch-action:auto!important}.lab.dragmode .piece{touch-action:none!important}
+.bucket{color:#20304a;min-width:0;overflow-wrap:anywhere}.buckets{grid-template-columns:repeat(auto-fit,minmax(100px,1fr))}.groupSlot{color:#20304a;min-width:105px;flex:1 1 110px;max-width:220px}.tray,.groupPieces{justify-content:center;gap:8px}.inpiece{width:17px;height:17px}
+.bridgeBtns,.supportBtns{gap:10px}.labBtns{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.adaptPanel{margin-top:16px}footer{max-width:760px;margin:20px auto;color:#52657b}footer details{padding:12px;background:#fff;border-radius:14px;text-align:left}summary{cursor:pointer;font-size:14px;font-weight:800;min-height:32px}footer button{font-size:14px}.release{font-size:12px}
+@media(max-width:480px){main{padding:10px 8px 20px}.card{padding:14px 10px}.tabs button{flex-basis:29%;font-size:13px;padding:8px 5px}.story{font-size:17px}.answer input{width:68px;font-size:28px}.answer{font-size:15px}.steps{font-size:12px}.buckets{grid-template-columns:repeat(2,minmax(0,1fr))}.buttons button{font-size:16px}.msg{font-size:17px}.bridgeBtns{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+</style></head><body><main><section class="card"><h1>➗ わりざんマスター</h1><p class="sub">見て・動かして・九九につなげよう</p>
+<div class="row"><span class="pill" aria-label="できた数">⭐ <b id="stars">0</b></span><span class="pill" aria-label="連続正解">🔥 <b id="streak">0</b></span><span class="pill">📝 今日 <b id="today">0</b>問</span></div>
+<div class="progress"><div id="bar" class="bar"></div></div><div id="challengeText" class="challenge">今日の10問 0/10</div>
+<div class="tabs"><button id="equal">同じ数ずつ</button><button id="group">いくつ分</button><button id="remain">あまり</button><button id="storyMode" class="purple">文章題</button><button id="labMode" class="orange">動かして分ける</button><button id="groupMode" class="orange">○こずつ まとめる</button><button class="purple" onclick="startBridge()">考え方チャレンジ</button><button id="adaptive" class="green" onclick="startAdaptivePractice()">🎯 おまかせ練習</button><button id="weak" class="green">にがて復習</button></div>
+<div class="steps" aria-label="学習の流れ"><span>① もんだい</span><span>② かんがえる</span><span>③ できた！</span></div><div id="story" class="story"></div><div id="problem" class="problem"></div><div id="visual" class="visual"></div>
+<div id="lab" class="lab"><div class="labTitle" id="labTitle"></div><div id="tray" class="tray"></div><div id="buckets" class="buckets"></div><div id="modeNotice" class="modeNotice">通常モード：画面をスクロールできます</div><div class="labBtns"><button id="dragToggle" class="orange">✋ ドラッグモード ON</button><button id="resetLab" class="soft">やりなおす</button><button class="soft" onclick="closeManip()">式にもどる</button></div><div id="labHelp" aria-live="polite" class="small" style="text-align:center;margin-top:6px"></div></div>
+<section id="groupLab" class="groupLab">
+<div class="labTitle">○こずつ まとめてみよう</div>
+<div id="groupInstruction" class="groupHint"></div>
+<div id="groupPieces" class="groupPieces"></div>
+<div id="groupSlots" class="groupSlots"></div>
+<div id="groupDone" class="groupDone" aria-live="polite"></div>
+<div class="labBtns"><button class="soft" onclick="resetManip()">↻ やりなおす</button><button class="yellow" onclick="closeGroupLab()">問題にもどる</button></div>
+</section><section id="bridge" class="bridge">
+<h2>🧠 どっちのわり算？</h2>
+<div id="bridgeQ" class="bridgeQ"></div>
+<div class="bridgeBtns">
+<button class="green" onclick="chooseBridge('equal')">👥 同じ数ずつ配る</button>
+<button class="orange" onclick="chooseBridge('group')">⭕ ○こずつまとめる</button>
+</div>
+<div id="bridgeMsg" class="bridgeMsg" aria-live="polite"></div>
+<div class="bridgeFlow">文章 → 考え方 → 操作 → 式</div>
+<div style="text-align:center;margin-top:7px"><button class="soft" onclick="closeBridge()">問題にもどる</button></div>
+</section><section id="supportPanel" class="supportPanel">
+<div class="supportTitle">💡 どの方法で考える？</div>
+<div id="supportText" class="supportText">答えはまだ見せません。考えやすい方法を選ぼう。</div>
+<div class="supportBtns">
+<button class="green" onclick="supportManipulate()">●を動かす</button>
+<button class="yellow" onclick="supportKuku()">九九ヒント</button>
+<button class="soft" onclick="supportEasy()">やさしい問題</button>
+</div>
+<div id="supportTag" class="supportTag"></div>
+</section><div id="answerArea" class="answer"><label for="ans">答え</label> <input id="ans" aria-describedby="problem" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off"> <span id="rw"><label for="rem">あまり</label> <input id="rem" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off"></span></div>
+<div class="buttons"><button id="check" class="blue">こたえあわせ</button><button id="hint" class="yellow">ヒント</button><button id="next" class="soft">つぎの問題</button><button id="easy" class="green">やさしくする</button></div><div id="msg" class="msg" aria-live="polite"></div>
+<div class="panel"><b>🏘️ わりざんタウン</b><div id="town" class="town"></div><div id="badges" class="badges"></div></div><div class="panel"><b>🌱 学習の見取り</b><div id="record" class="small"></div></div>
+</section><section class="adaptPanel">
+<div class="adaptTitle">📊 この端末の学び方</div>
+<div class="adaptGrid">
+<div class="adaptCell">同じ数ずつ<br><b id="apEqual">—</b></div>
+<div class="adaptCell">いくつ分<br><b id="apGroup">—</b></div>
+<div class="adaptCell">あまり<br><b id="apRemain">—</b></div>
+<div class="adaptCell">九九ヒント<br><b id="apKuku">0</b>回</div>
+<div class="adaptCell">操作に戻る<br><b id="apManip">0</b>回</div>
+<div class="adaptCell">やさしくする<br><b id="apEasy">0</b>回</div>
+</div>
+<div id="adaptMode" class="small" style="text-align:center;font-weight:900;margin-top:7px">🎯 おまかせ練習：まだ開始していません</div><div id="adaptNote" class="small" style="text-align:center;margin-top:5px">名前やIDは保存しません。この端末内だけで学習を調整します。</div>
+</section><footer><p>登録不要・広告なし。名前やIDの入力はありません。<br>このアプリの学習記録は、このブラウザ内に保存されます。<br>同じブラウザを使う人とは記録が共通になります。<br>配信元のGitHub Pagesでは、アクセス時の通信情報が処理されます。</p><p id="storageNotice" role="status" hidden>記録を保存できないため、今はこの画面を開いている間だけ記録します。</p><details><summary>保護者・先生へ／記録の管理</summary><p>図やヒントを使った正解も含め、答えあわせの回数で正解率を計算します。空欄・整数以外の入力は集計しません。操作練習は完成時に1回記録します。正解率だけで理解度を判断せず、子どもの説明と合わせて見てください。</p><p>別の子が使う前に、必要に応じて記録を消してください。ブラウザのデータ消去でも記録は消えます。</p><button id="resetRecords" class="soft">このブラウザの学習記録を消す</button><div id="resetConfirm" hidden><p>星・バッジ・練習の記録をすべて消します。もとには戻せません。</p><button id="cancelReset" class="soft">やめる</button> <button id="confirmReset" class="orange">記録を消す</button></div></details><p class="release">わりざんマスター · 正式版 1.0</p></footer></main>
+<script>
+"use strict";
+(() => {
+  const $ = id => document.getElementById(id);
+  const K = "warizanMasterV5", APKEY = "warizanMasterAdaptiveV16";
+  const kinds = ["equal", "group", "remain"];
+  const names = {equal:"同じ数ずつ", group:"いくつ分", remain:"あまり", story:"文章題", lab:"動かして分ける", groupLab:"○こずつ まとめる"};
+  const day = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
+  const count = x => Number.isSafeInteger(x) && x >= 0 ? Math.min(x, 10000000) : 0;
+  let storageOK = true;
+  function read(key) { try { const x = JSON.parse(localStorage.getItem(key) || "{}"); return x && typeof x === "object" && !Array.isArray(x) ? x : {}; } catch (_) { return {}; } }
+  const old = read(K), oldAP = read(APKEY);
+  function validQ(x) { return x && kinds.includes(x.m) && Number.isInteger(x.d) && x.d >= 2 && x.d <= 9 && Number.isInteger(x.a) && x.a >= 1 && x.a <= 9 && Number.isInteger(x.r) && x.r >= 0 && x.r < x.d && x.n === x.d*x.a+x.r && (x.m === "remain" || x.r === 0); }
+  const s = {stars:count(old.stars), streak:count(old.streak), tries:Math.max(count(old.tries),count(old.correct)), correct:count(old.correct), miss:{}, weak:Array.isArray(old.weak)?old.weak.filter(validQ).slice(0,8):[], day:day(), dayDone:old.day===day()?count(old.dayDone):0, level:1};
+  for (const k of [...kinds,"story"]) s.miss[k]=count(old.miss?.[k]);
+  const ap = {kuku:count(oldAP.kuku), manip:count(oldAP.manip), easy:count(oldAP.easy)};
+  for (const k of kinds) ap[k]={ok:count(oldAP[k]?.ok),ng:count(oldAP[k]?.ng)};
+  let mode="equal", q, done=false, h=0, adaptive=false, manip=null, bridgeNow=null, dragMode=false, cancelDrag=null;
+  const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+  function save() {
+    try { localStorage.setItem(K,JSON.stringify(s)); localStorage.setItem(APKEY,JSON.stringify(ap)); storageOK=true; }
+    catch (_) { storageOK=false; }
+    $("storageNotice").hidden=storageOK;
+  }
+  function rollover() { if(s.day!==day()){s.day=day();s.dayDone=0;} }
+  function stats() {
+    rollover(); s.level=Math.min(3,1+Math.floor(s.correct/12));
+    $("stars").textContent=s.stars; $("streak").textContent=s.streak; $("today").textContent=s.dayDone;
+    $("bar").style.width=Math.min(100,s.dayDone*10)+"%";
+    $("challengeText").textContent=(s.dayDone>=10?"🎉 今日の10問クリア！":"今日の10問 "+s.dayDone+"/10")+"　Lv."+s.level;
+    const w=Object.entries(s.miss).sort((a,b)=>b[1]-a[1])[0];
+    $("record").textContent=`正解率 ${s.tries?Math.round(s.correct/s.tries*100):0}％（答えあわせごとに集計）。現在Lv.${s.level}。`+(w[1]?`「${names[w[0]]}」をもう少し練習してみよう。`:"いろいろな分け方に挑戦しよう。");
+    const icons=["🏠","🌳","🏫","🏪","🌷","🏡","🌲","🏰","🚉","🎡"];
+    $("town").textContent=icons.slice(0,Math.min(10,Math.floor(s.correct/3)+1)).join(" ");
+    const badges=[]; if(s.correct>=5)badges.push("🥉"); if(s.correct>=15)badges.push("🥈"); if(s.correct>=30)badges.push("🥇"); if(s.dayDone>=10)badges.push("🏅"); if(s.streak>=5)badges.push("🔥");
+    $("badges").textContent=badges.length?"バッジ "+badges.join(" "):"5問できたら、はじめのバッジ！";
+    for(const k of kinds){const x=ap[k], n=x.ok+x.ng; $("ap"+k[0].toUpperCase()+k.slice(1)).textContent=n?Math.round(x.ok/n*100)+"%":"—";}
+    $("apKuku").textContent=ap.kuku; $("apManip").textContent=ap.manip; $("apEasy").textContent=ap.easy;
+    const weak=weakest(); $("adaptNote").textContent=weak?`「${names[weak]}」を少し多めに練習するとよさそうです。`:"名前やIDは保存しません。このブラウザ内だけで学習を調整します。";
+    $("adaptMode").textContent=adaptive?`🎯 おまかせ練習中：${names[q?.m]||"準備中"}（つぎも自動で選びます）`:"🎯 好きな練習を選んでいます";
+    save();
+  }
+  function weakest(){return kinds.filter(k=>ap[k].ok+ap[k].ng>=2&&ap[k].ng>0).sort((a,b)=>ap[b].ng/(ap[b].ok+ap[b].ng)-ap[a].ng/(ap[a].ok+ap[a].ng))[0]||null;}
+  function base(easy=false,kind="equal") {
+    const max=easy?3:s.level===1?5:s.level===2?7:9;
+    const d=rnd(2,max), a=rnd(1,max), r=kind==="remain"?rnd(1,d-1):0;
+    return {d,a,r,n:d*a+r,m:kind};
+  }
+  function remember(){ if(!s.weak.some(x=>x.n===q.n&&x.d===q.d&&x.m===q.m)&&s.weak.length<8)s.weak.push({...q}); }
+  function clearTransient(){
+    setDragMode(false); manip=null; bridgeNow=null;
+    for(const id of ["lab","groupLab","bridge","supportPanel"])$(id).classList.remove("show");
+    $("supportText").textContent="考えやすい方法を選ぼう。"; $("supportTag").textContent="";
+  }
+  function active(){
+    for(const [id,m] of [["equal","equal"],["group","group"],["remain","remain"],["storyMode","story"],["labMode","lab"],["groupMode","groupLab"]]){
+      const on=mode===m; $(id).classList.toggle("on",on); $(id).setAttribute("aria-pressed",String(on));
+    }
+    $("adaptive").setAttribute("aria-pressed",String(adaptive));
+  }
+  function render(){
+    clearTransient(); done=false;h=0; $("ans").value="";$("rem").value="";$("msg").textContent="";
+    $("check").disabled=false;$("check").hidden=false;$("hint").disabled=false; $("answerArea").hidden=false;$("visual").hidden=false;$("story").hidden=false;$("problem").hidden=false;
+    $("rw").hidden=q.m!=="remain"; $("visual").replaceChildren();
+    const equal=q.m==="equal";
+    $("story").textContent=mode==="story"?(equal?`クッキーが ${q.n}こ。${q.d}人で同じ数ずつ分けます。1人分は何こ？`:`色紙が ${q.n}まい。${q.d}まいずつ配ります。何人に配れる？`):equal?`${q.n}こを ${q.d}人に同じ数ずつ分けます。1人分は何こ？`:q.m==="group"?`${q.n}こを ${q.d}こずつに分けます。何グループできる？`:`${q.n}こを ${q.d}こずつに分けます。何グループできて、いくつあまる？`;
+    $("problem").textContent=`${q.n} ÷ ${q.d} ＝ ？`;
+    // The initial picture shows the total, without revealing the partition.
+    drawTotal(); active();
+    if(mode==="lab"||mode==="groupLab")openManip(mode==="lab"?"equal":"group",true);
+    stats();
+  }
+  function drawTotal(){
+    const v=$("visual");v.replaceChildren();v.setAttribute("aria-label",`${q.n}この丸`);
+    for(let i=0;i<q.n;i++){const dot=document.createElement("i");dot.className="dot";dot.setAttribute("aria-hidden","true");v.append(dot);}
+  }
+  function make(easy=false){
+    if(adaptive){const w=weakest();mode=w&&Math.random()<.6?w:kinds[rnd(0,2)];}
+    const kind=mode==="story"?kinds[rnd(0,1)]:mode==="lab"?"equal":mode==="groupLab"?"group":mode;
+    q=base(easy,kind);render();
+  }
+  function set(m){adaptive=false;mode=m;make();}
+  function record(ok){
+    rollover(); s.tries++;ap[q.m][ok?"ok":"ng"]++;
+    if(ok){done=true;s.correct++;s.stars++;s.streak++;s.dayDone++; s.weak=s.weak.filter(x=>!(x.n===q.n&&x.d===q.d&&x.m===q.m)); $("check").disabled=true;$("supportPanel").classList.remove("show");}
+    else{s.streak=0;s.miss[mode==="story"?"story":q.m]++;remember();}
+    stats();
+  }
+  function check(){
+    if(done||bridgeNow)return;
+    if(manip?.standalone){
+      if(manipComplete()){finishManip();return;}
+      $("msg").textContent="●を選んで、入れたい箱を押そう。箱を押すと1こもどせます。";return;
+    }
+    const a=$("ans").value.trim(),r=$("rem").value.trim();
+    if(!/^\d+$/.test(a)){ $("msg").textContent="答えに、0以上の整数を入れてね。";$("ans").focus();return; }
+    if(q.m==="remain"&&!/^\d+$/.test(r)){ $("msg").textContent="あまりにも、0以上の整数を入れてね。";$("rem").focus();return; }
+    if(!Number.isSafeInteger(Number(a))||(q.m==="remain"&&!Number.isSafeInteger(Number(r)))){ $("msg").textContent="数字を確かめて、もう一度入れてね。";return; }
+    const ok=Number(a)===q.a&&(q.m!=="remain"||Number(r)===q.r);
+    record(ok);
+    $("msg").textContent=ok?(s.dayDone===10?"🏅 せいかい！ 今日の10問クリア！":"⭕ せいかい！ つぎの問題にすすもう。"):(q.m==="remain"&&Number(r)>=q.d?`あまりは ${q.d} より小さくなるよ。もう1つまとまりを作れるかな？`:"もう一度、図や九九で考えてみよう。");
+    if(!ok)showSupport();
+  }
+  function showSupport(){ $("supportPanel").classList.add("show"); $("supportTag").textContent=`この問題は「${names[q.m]}」の考え方。`; }
+  function hint(){
+    if(bridgeNow)return;h++;ap.kuku++;
+    $("msg").textContent=h===1?(q.m==="remain"?`${q.d} × □ が ${q.n} をこえない、一番大きい九九を探そう。`:`${q.d} × □ ＝ ${q.n} になる九九を探そう。`):h===2?`${q.d} × ${q.a} ＝ ${q.d*q.a}。`+(q.r?`${q.n}から引くと、何こ残るかな？`:"図と見くらべよう。"):`${q.n} ÷ ${q.d} ＝ ${q.a}`+(q.m==="remain"?` あまり ${q.r}`:"")+"。自分でも確かめよう。";
+    stats();
+  }
+  function supportKuku(){hint();$("supportPanel").classList.remove("show");}
+  function supportManipulate(){if(done)return;ap.manip++;stats();$("supportPanel").classList.remove("show");openManip(q.m==="equal"?"equal":"group",false);}
+  function easy(){remember();ap.easy++;q=base(true,q.m);render();}
+  function openManip(type,standalone){
+    setDragMode(false);$("lab").classList.remove("show");$("groupLab").classList.remove("show");
+    // Remainders use grouping, never an impossible equal-sharing task.
+    const group=type==="group", slots=group?q.a+(q.r?1:0):q.d;
+    manip={type,standalone,counts:Array(slots).fill(0),selected:false,complete:false};
+    const panel=group?$("groupLab"):$("lab");panel.classList.add("show");
+    $("answerArea").hidden=standalone;$("check").hidden=standalone;$("visual").hidden=true;
+    $("labTitle").textContent="●を選ぶ → 入れたい箱を押す";
+    $("groupInstruction").textContent=`${q.n}こを、${q.d}こずつのまとまりにしよう。`+(q.r?"まとまりにできない分は「あまり」へ。":"");
+    renderManip();
+  }
+  function remaining(){return q.n-manip.counts.reduce((a,b)=>a+b,0);}
+  function manipComplete(){
+    if(!manip||remaining()!==0)return false;
+    return manip.type==="equal"?manip.counts.every(c=>c===q.a):manip.counts.every((c,i)=>c===(i<q.a?q.d:q.r));
+  }
+  function renderManip(){
+    if(!manip)return;
+    const group=manip.type==="group", tray=group?$("groupPieces"):$("tray"), buckets=group?$("groupSlots"):$("buckets");
+    tray.replaceChildren();buckets.replaceChildren();
+    for(let i=0;i<remaining();i++){
+      const p=document.createElement("button");p.type="button";p.className=group?"gp":"piece";p.setAttribute("aria-label",`青い丸 ${i+1} を選ぶ`);
+      p.setAttribute("aria-pressed",String(manip.selected&&i===0));
+      if(manip.selected&&i===0)p.classList.add(group?"sel":"selected");
+      p.onclick=()=>{if(done&&manip.standalone)return;manip.selected=!manip.selected;renderManip();if(manip.selected)buckets.firstElementChild?.focus({preventScroll:true});};
+      p.onpointerdown=e=>{if(dragMode&&!group)startDrag(e,p);};tray.append(p);
+    }
+    manip.counts.forEach((c,i)=>{
+      const b=document.createElement("button");b.type="button";b.className=group?"groupSlot":"bucket";b.dataset.i=String(i);
+      const label=group?(i<q.a?`まとまり ${i+1}`:"あまり"):`${i+1}人目`;
+      b.setAttribute("aria-label",`${label}、${c}こ。${manip.selected?"1こ入れる":"1こもどす"}`);
+      b.classList.toggle("selectTarget",manip.selected);b.append(document.createTextNode(label));
+      const counter=document.createElement("div");counter.className="count";counter.textContent=c+"こ";b.append(counter);
+      const dots=document.createElement("div");dots.className="bucketDots";dots.setAttribute("aria-hidden","true");
+      for(let j=0;j<c;j++){const dot=document.createElement("i");dot.className="inpiece";dots.append(dot);}b.append(dots);
+      b.onclick=()=>manip.selected?put(i):undo(i);buckets.append(b);
+    });
+    const text=manipComplete()?`できた！ ${q.n} ÷ ${q.d} ＝ ${q.a}`+(q.m==="remain"?` あまり ${q.r}`:""):remaining()?`あと ${remaining()}こ。●を選んで、入れたい箱を押そう。`:"数を見くらべよう。箱を押すと1こもどせます。";
+    $(group?"groupDone":"labHelp").textContent=text;
+    if(!group)$("modeNotice").textContent=dragMode?"ドラッグ中は●を運べます。外側の余白でスクロールできます。":manip.selected?"入れたい箱を押してください。":"タップ移動：● → 箱。箱だけ押すと1こもどせます。";
+  }
+  function put(i){
+    if(!manip||(done&&manip.standalone)||remaining()<=0||!Number.isInteger(i)||i<0||i>=manip.counts.length)return;
+    if(manip.type==="group"&&manip.counts[i]>=(i<q.a?q.d:q.d-1)){ $("groupDone").textContent="この箱はいっぱいです。別の箱を選ぼう。";return; }
+    manip.counts[i]++;manip.selected=false;renderManip();finishManip();
+    const tray=$(manip.type==="group"?"groupPieces":"tray");
+    if(done&&manip.standalone)$("next").focus({preventScroll:true});
+    else if(tray.firstElementChild)tray.firstElementChild.focus({preventScroll:true});
+    else if(manipComplete())$("ans").focus({preventScroll:true});
+  }
+  function undo(i){
+    if(!manip||(done&&manip.standalone)||manip.counts[i]===0)return;
+    manip.counts[i]--;manip.complete=false;renderManip();
+    $(manip.type==="group"?"groupSlots":"buckets").children[i]?.focus({preventScroll:true});
+  }
+  function finishManip(){
+    if(!manipComplete()||manip.complete)return;manip.complete=true;
+    if(manip.standalone&&!done){record(true);$("msg").textContent="⭕ 分けられた！ つぎの問題にすすもう。";}
+    else $("msg").textContent="分けられたね！ 答えを入れて、こたえあわせしよう。";
+  }
+  function resetManip(){
+    if(!manip)return;
+    if(done&&manip.standalone){$("msg").textContent="この問題はクリア済みです。つぎの問題にすすもう。";return;}
+    openManip(manip.type,manip.standalone);
+  }
+  function closeManip(){
+    if(manip?.standalone){mode=q.m;active();}
+    setDragMode(false);manip=null;$("lab").classList.remove("show");$("groupLab").classList.remove("show");
+    $("answerArea").hidden=false;$("check").hidden=false;$("visual").hidden=false;
+  }
+  function setDragMode(on){
+    if(cancelDrag)cancelDrag();dragMode=on;
+    $("lab").classList.toggle("dragmode",on);$("dragToggle").setAttribute("aria-pressed",String(on));
+    $("dragToggle").textContent=on?"タップ移動に切りかえる":"✋ ドラッグで動かす";
+    if(manip)renderManip();
+  }
+  function startDrag(e,p){
+    if(!manip||done||e.button>0)return;e.preventDefault();if(cancelDrag)cancelDrag();
+    const rect=p.getBoundingClientRect(),ghost=p.cloneNode(true);ghost.classList.add("dragging");ghost.setAttribute("aria-hidden","true");ghost.tabIndex=-1;document.body.append(ghost);
+    const abort=new AbortController();let x=e.clientX,y=e.clientY;
+    const paint=()=>{ghost.style.left=x-rect.width/2+"px";ghost.style.top=y-rect.height/2+"px";};paint();
+    const cleanup=()=>{abort.abort();ghost.remove();cancelDrag=null;};cancelDrag=cleanup;
+    document.addEventListener("pointermove",ev=>{if(ev.pointerId!==e.pointerId)return;ev.preventDefault();x=ev.clientX;y=ev.clientY;paint();},{signal:abort.signal,passive:false});
+    document.addEventListener("pointerup",ev=>{
+      if(ev.pointerId!==e.pointerId)return;ev.preventDefault();
+      const b=document.elementFromPoint(ev.clientX,ev.clientY)?.closest("#buckets .bucket");cleanup();if(b)put(Number(b.dataset.i));
+    },{signal:abort.signal});
+    document.addEventListener("pointercancel",ev=>{if(ev.pointerId===e.pointerId)cleanup();},{signal:abort.signal});
+    window.addEventListener("blur",cleanup,{signal:abort.signal});
+  }
+  const bridgeProblems=[
+    {m:"equal",n:12,d:3,text:"12このクッキーを、3人に同じ数ずつ分けます。1人分は何こ？"},
+    {m:"group",n:12,d:3,text:"12このクッキーを、3こずつ袋に入れます。袋はいくつできる？"},
+    {m:"equal",n:20,d:5,text:"20このおはじきを、5人に同じ数ずつ分けます。1人分は何こ？"},
+    {m:"group",n:20,d:5,text:"20このおはじきを、5こずつのまとまりにします。まとまりはいくつ？"}
+  ];
+  function startBridge(){
+    closeManip();adaptive=false;clearTransient();bridgeNow=bridgeProblems[rnd(0,bridgeProblems.length-1)];
+    $("bridge").classList.add("show");$("bridgeQ").textContent=bridgeNow.text;$("bridgeMsg").textContent="どちらの分け方か選ぼう。";
+    $("answerArea").hidden=true;$("check").hidden=true;$("hint").disabled=true;$("story").hidden=true;$("problem").hidden=true;$("visual").hidden=true;stats();
+    $("bridge").querySelector("button").focus({preventScroll:true});
+  }
+  function chooseBridge(type){
+    if(!bridgeNow)return;
+    if(type!==bridgeNow.m){$("bridgeMsg").textContent="「同じ数ずつ」かな？「○こずつ」かな？ ことばに注目しよう。";return;}
+    const b=bridgeNow;mode=b.m; q={n:b.n,d:b.d,a:b.n/b.d,r:0,m:b.m};render();openManip(type,false);
+    $("msg").textContent="そう！ 同じ問題を、●を動かして確かめよう。";
+  }
+  function closeBridge(){bridgeNow=null;$("bridge").classList.remove("show");$("answerArea").hidden=false;$("check").hidden=false;$("hint").disabled=false;$("story").hidden=false;$("problem").hidden=false;$("visual").hidden=false;}
+  function startAdaptivePractice(){adaptive=true;make();}
+  // One event route for each action; buttons and Enter share the same validator.
+  for(const [id,m] of [["equal","equal"],["group","group"],["remain","remain"],["storyMode","story"],["labMode","lab"],["groupMode","groupLab"]])$(id).onclick=()=>set(m);
+  $("weak").onclick=()=>{adaptive=false;if(s.weak.length){q={...s.weak[0]};mode=q.m;render();}else{mode=weakest()||"equal";make();$("msg").textContent="にがてな問題がまだないので、この問題で練習しよう。";}};
+  $("check").onclick=check;$("hint").onclick=hint;$("next").onclick=()=>make();$("easy").onclick=easy;
+  $("dragToggle").onclick=()=>setDragMode(!dragMode);$("resetLab").onclick=resetManip;
+  $("ans").onkeydown=e=>{if(e.key!=="Enter"||e.isComposing)return;e.preventDefault();if(done)return;if(q.m==="remain")$("rem").focus();else check();};
+  $("rem").onkeydown=e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();check();}};
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){setDragMode(false);if(manip){manip.selected=false;renderManip();}}});
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)setDragMode(false);else stats();});
+  $("resetRecords").onclick=()=>{
+    $("resetConfirm").hidden=false;$("cancelReset").focus();
+  };
+  $("cancelReset").onclick=()=>{$("resetConfirm").hidden=true;$("resetRecords").focus();};
+  $("confirmReset").onclick=()=>{
+    Object.assign(s,{stars:0,streak:0,tries:0,correct:0,weak:[],day:day(),dayDone:0,level:1});
+    for(const k of [...kinds,"story"])s.miss[k]=0;for(const k of kinds)ap[k]={ok:0,ng:0};ap.kuku=ap.manip=ap.easy=0;
+    $("resetConfirm").hidden=true;adaptive=false;mode="equal";make();$("msg").textContent="このブラウザの学習記録を消しました。";
+  };
+  Object.assign(window,{startBridge,chooseBridge,closeBridge,startAdaptivePractice,supportManipulate,supportKuku,supportEasy:easy,closeGroupLab:closeManip,resetManip,closeManip});
+  // Initialize only after every state object and handler exists.
+  stats();make();
+})();
+
+</script></body></html>
