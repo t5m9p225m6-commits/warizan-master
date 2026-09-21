@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef6ff">
+<title>わりざんマスター</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef6ff;color:#20304a;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
+main{max-width:720px;margin:auto;padding:14px}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 6px 22px rgba(35,55,90,.12)}
+h1{text-align:center;font-size:32px;margin:4px 0}
+.sub{text-align:center;color:#64748b;margin:0 0 12px}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.pill{background:#e8f2ff;border-radius:999px;padding:8px 13px;font-weight:800}
+.story{text-align:center;font-size:19px;min-height:58px;margin:18px 0 4px;line-height:1.55}
+.problem{text-align:center;font-size:56px;font-weight:900;margin:16px 0}
+.answer{text-align:center}
+input{width:170px;font-size:42px;text-align:center;border:3px solid #94a3b8;border-radius:15px;padding:8px;background:white}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+button{border:0;border-radius:15px;min-height:58px;padding:12px;font-size:18px;font-weight:900;cursor:pointer;touch-action:manipulation}
+.primary{background:#2563eb;color:white}.hint{background:#fde68a}.next{background:#dbeafe}.easy{background:#dcfce7}
+.msg{text-align:center;min-height:70px;font-size:22px;font-weight:900;padding-top:14px;line-height:1.45}
+.visual{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;min-height:42px;margin-top:8px}
+.dot{width:18px;height:18px;border-radius:50%;background:#60a5fa;display:inline-block}
+.group{border:2px solid #bfdbfe;border-radius:12px;padding:7px;min-width:48px;text-align:center}
+footer{text-align:center;color:#64748b;font-size:13px;margin:14px}
+@media(max-width:480px){.problem{font-size:48px}h1{font-size:28px}.card{padding:14px}.story{font-size:17px}}
+</style>
+</head>
+<body>
+<main>
+<section class="card">
+<h1>➗ わりざんマスター</h1>
+<p class="sub">九九をつかって、わり算のしくみをつかもう</p>
+<div class="stats">
+<span class="pill">⭐ 正解 <b id="correct">0</b></span>
+<span class="pill">🔥 連続 <b id="streak">0</b></span>
+<span class="pill">📝 今日 <b id="today">0</b>問</span>
+</div>
+<div id="story" class="story"></div>
+<div id="problem" class="problem"></div>
+<div id="visual" class="visual"></div>
+<div class="answer"><input id="answer" type="number" inputmode="numeric" min="0" autocomplete="off" aria-label="答え"></div>
+<div class="grid">
+<button id="check" class="primary">こたえあわせ</button>
+<button id="hint" class="hint">ヒント</button>
+<button id="next" class="next">つぎの問題</button>
+<button id="easy" class="easy">やさしい問題</button>
+</div>
+<div id="msg" class="msg" aria-live="polite"></div>
+</section>
+<footer>名前などの個人情報は集めません。記録はこの端末内だけに保存します。</footer>
+</main>
+<script>
+"use strict";
+(function(){
+ const $=id=>document.getElementById(id);
+ let q=null;
+ let state={correct:0,streak:0,today:0};
+ try{
+   const old=JSON.parse(localStorage.getItem("warizanMasterStable")||"null");
+   if(old && typeof old==="object") state=Object.assign(state,old);
+ }catch(e){}
+ function save(){try{localStorage.setItem("warizanMasterStable",JSON.stringify(state));}catch(e){}}
+ function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+ function renderStats(){$("correct").textContent=state.correct;$("streak").textContent=state.streak;$("today").textContent=state.today}
+ function dots(groups,each){
+   $("visual").innerHTML="";
+   if(groups*each>36)return;
+   for(let g=0;g<groups;g++){
+     const box=document.createElement("span");box.className="group";
+     for(let i=0;i<each;i++){const d=document.createElement("i");d.className="dot";box.appendChild(d)}
+     $("visual").appendChild(box);
+   }
+ }
+ function make(easy){
+   const divisor=easy?rand(2,5):rand(2,9);
+   const answer=easy?rand(1,5):rand(1,9);
+   const dividend=divisor*answer;
+   q={dividend,divisor,answer};
+   $("problem").textContent=dividend+" ÷ "+divisor+" ＝ ？";
+   $("story").textContent=dividend+"こを "+divisor+"人に、同じ数ずつ分けます。1人分はいくつ？";
+   $("answer").value="";
+   $("msg").textContent="";
+   dots(divisor,answer);
+   $("answer").focus();
+ }
+ function hint(){
+   $("story").textContent=q.divisor+" × □ ＝ "+q.dividend+" になる数を、九九からさがそう。";
+   $("msg").textContent="「"+q.divisor+"のだん」を思い出してみよう。";
+ }
+ function check(){
+   const raw=$("answer").value.trim();
+   if(raw===""){$("msg").textContent="答えを入れてから、こたえあわせを押してね。";return}
+   state.today++;
+   if(Number(raw)===q.answer){
+     state.correct++;state.streak++;
+     $("msg").textContent="⭕ せいかい！　"+q.divisor+" × "+q.answer+" ＝ "+q.dividend;
+   }else{
+     state.streak=0;
+     $("msg").textContent="△ おしい！　ヒントを見て、もう一度考えてみよう。";
+   }
+   renderStats();save();
+ }
+ $("check").addEventListener("click",check);
+ $("hint").addEventListener("click",hint);
+ $("next").addEventListener("click",()=>make(false));
+ $("easy").addEventListener("click",()=>make(true));
+ $("answer").addEventListener("keydown",e=>{if(e.key==="Enter")check()});
+ window.addEventListener("error",()=>{$("msg").textContent="読み込みで問題が起きました。ページを再読み込みしてください。"});
+ renderStats();make(false);
+})();
+</script>
+</body>
+</html>
