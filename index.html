@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#24634f">
+<title>わりざんマスター 3.5.0</title>
+<style>
+*{box-sizing:border-box} [hidden]{display:none!important}
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:#193c32;background:#f1f6f2;font-synthesis:none}
+body{margin:0}main{max-width:920px;margin:auto;padding:20px 16px 36px}h1{font-size:clamp(25px,5vw,36px);margin:8px 0}h2{font-size:24px;margin:0 0 12px}p{line-height:1.7}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation;min-height:48px;border:1px solid #bfd1c7;border-radius:12px;background:#fff;color:inherit;padding:12px 16px;font-weight:700}button:hover{background:#edf6ef}button:disabled{cursor:default;opacity:.55}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #276fc0;outline-offset:3px}.primary{background:#24634f;color:#fff;border-color:#24634f}.primary:hover{background:#194f3f}.eyebrow{font-size:12px;letter-spacing:.15em;font-weight:800;color:#496b5e}.intro{padding:12px 4px 20px}.intro p{margin:6px 0;color:#4d695f}.stats{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0}.stats span{background:#e2eee4;border-radius:10px;padding:8px 12px;font-size:14px}.panel{background:white;border:1px solid #d3e0d7;border-radius:20px;padding:24px;margin:14px 0}.muted,small{color:#4d695f}.small{font-size:13px}.setting{display:flex;align-items:flex-start;gap:10px;margin:16px 0;font-size:14px;line-height:1.6}.setting input{width:22px;height:22px;flex:none;margin:0}details{border:1px solid #ceded2;background:#fff;border-radius:16px;margin:12px 0;overflow:hidden}summary{display:flex;align-items:center;gap:12px;cursor:pointer;padding:18px;list-style:none;touch-action:manipulation}summary::-webkit-details-marker{display:none}summary::after{content:'＋';font-size:22px}details[open] summary::after{content:'−'}summary>span:nth-child(2){flex:1;min-width:0}summary b{font-size:21px}summary small{display:block;font-size:12px;margin-top:5px}.emoji{font-size:30px}.group-stars{font-size:13px;white-space:nowrap}.stage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 16px 16px}.stage{text-align:left;display:flex;flex-direction:column;gap:8px;min-width:0;padding:16px}.stage b{font-size:17px}.stage>span{font-size:13px;font-weight:400;line-height:1.5}.stage .record{color:#795409;font-weight:700}.notice{padding:12px;border-radius:10px;background:#fff2ce;font-size:14px;line-height:1.6}header.game-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.game-head p{margin:0}.counter{white-space:nowrap;font-weight:700}progress{width:100%;height:12px;accent-color:#24634f;margin:18px 0}.problem{font-size:clamp(32px,7vw,56px);font-weight:800;text-align:center;margin:24px 0;letter-spacing:.02em}.story{min-height:28px;text-align:center;line-height:1.8}.answers{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:22px 0}.answers label{display:flex;align-items:center;gap:10px;font-weight:700}.answers input{width:106px;min-height:64px;border:2px solid #779588;border-radius:12px;text-align:center;font-size:30px;color:#193c32;background:white}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.actions button{flex:1;max-width:300px}.feedback{min-height:70px;text-align:center;font-size:19px;font-weight:700;line-height:1.7;padding:12px 0;overflow-wrap:anywhere}.hint{padding:12px;background:#fff6d9;border-radius:12px;line-height:1.7;margin-top:12px}.back{display:block;margin:20px auto 0}.result{text-align:center}.score{font-size:64px;font-weight:800;margin:16px 0}.stars{font-size:40px;color:#936806;letter-spacing:5px}.result-stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:20px 0}.result-stats p{margin:0}.review{text-align:left;margin:24px 0}.review li{padding:6px 0;line-height:1.6}.footer{text-align:center;font-size:12px;color:#4d695f;line-height:1.8;margin-top:24px}#startup{margin:12px 0}.achievement{max-width:560px;margin:18px auto;padding:16px;border-radius:16px;background:#f7fbf4;border:1px solid #d4e5d3}.achievement strong{display:block;font-size:20px;margin-bottom:6px}.achievement p{margin:4px 0;line-height:1.6}.next-goal{font-size:14px;color:#4d695f}.celebrate{font-size:34px;letter-spacing:8px;min-height:44px;animation:pop .55s ease-out}.course-progress{margin-top:10px;font-size:13px;color:#4d695f}.stage.cleared{background:#f5fbf4;border-color:#9fc5a4}.stage.perfect{box-shadow:inset 0 0 0 2px #d4aa35}.support-card{max-width:640px;margin:12px auto;padding:14px;border:1px solid #d5e3da;border-radius:14px;background:#f7faf8}.support-title{font-weight:800;margin-bottom:8px}.visual{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 0}.visual-group{display:flex;gap:4px;align-items:center;padding:7px;border:1px solid #c8d9cf;border-radius:10px;background:#fff;min-height:38px}.dot{display:inline-block;font-size:20px;line-height:1}.retry-note{font-size:13px;color:#4d695f;text-align:center;margin:8px 0}.retry-badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#fff2ce;font-size:12px;font-weight:800;margin-left:6px}.town{margin:18px 0 24px;border:1px solid #bdd7c5;border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(38,99,79,.08)}.town-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 18px 10px}.town-head h2{margin:0;font-size:22px}.town-level{font-size:13px;font-weight:800;background:#eef8ef;border:1px solid #cfe3d3;border-radius:999px;padding:7px 11px;white-space:nowrap}.town-picture{position:relative;width:100%;aspect-ratio:16/8;min-height:250px;max-height:440px;background:#bfe8ff;overflow:hidden;border-top:1px solid #d7e7dc;border-bottom:1px solid #d7e7dc}.town-picture svg{display:block;width:100%;height:100%}.build{opacity:.08;transform-box:fill-box;transform-origin:center bottom;transition:opacity .45s ease,transform .45s ease}.build.unlocked{opacity:1;transform:translateY(0) scale(1)}.build:not(.unlocked){transform:translateY(8px) scale(.96)}.town-sun{transform-origin:center;animation:floatSun 7s ease-in-out infinite}.cloud{animation:cloudDrift 12s ease-in-out infinite alternate}.cloud.two{animation-duration:15s;animation-delay:-4s}.town-info{padding:12px 18px 16px;background:#f8fcf7}.town-meter{width:100%;height:12px;margin:6px 0 5px}.town-msg{font-size:14px;color:#3f6255;margin:0;font-weight:700}.town-caption{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.88);border:1px solid rgba(128,160,140,.35);border-radius:12px;padding:7px 10px;font-size:12px;font-weight:800;backdrop-filter:blur(4px)}.recommend{margin:14px 0 18px;padding:14px 16px;border:1px solid #d6e4d9;border-radius:16px;background:#fff}.recommend strong{display:block;margin-bottom:4px}.recommend button{margin-top:10px;width:100%;max-width:420px}.milestone{font-weight:800;color:#6f520b}
+.town-detail{opacity:.08;transform-box:fill-box;transform-origin:center bottom;transition:opacity .45s ease,transform .45s ease}.town-detail.unlocked{opacity:1;transform:scale(1)}.town-detail:not(.unlocked){transform:scale(.75)}
+.town-grow-note{margin:8px 0 0;font-size:12px;color:#4d695f}.town-new{animation:townPop .85s ease-out}.growth-card{max-width:560px;margin:16px auto;padding:16px;border:2px solid #cfe3d3;border-radius:18px;background:#f5fbf4;text-align:center}.growth-card strong{display:block;font-size:20px;margin-bottom:6px}.growth-icon{font-size:42px;min-height:54px}.growth-card button{margin-top:10px}.town-flash{animation:townGlow 1s ease-out}
+@keyframes townPop{0%{opacity:0;transform:translateY(18px) scale(.5)}65%{transform:translateY(-4px) scale(1.12)}100%{opacity:1;transform:translateY(0) scale(1)}}@keyframes townGlow{0%{box-shadow:0 0 0 0 rgba(255,211,79,.9)}100%{box-shadow:0 0 0 28px rgba(255,211,79,0)}}@media(prefers-reduced-motion:reduce){.town-new,.town-flash{animation:none}.town-detail{transition:none}}
+@keyframes floatSun{50%{transform:translateY(5px)}}@keyframes cloudDrift{to{transform:translateX(18px)}}@media(prefers-reduced-motion:reduce){.town-sun,.cloud{animation:none}.build{transition:none}}@keyframes pop{0%{transform:scale(.65);opacity:.2}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@media(prefers-reduced-motion:reduce){.celebrate{animation:none}}
+@media(max-width:520px){main{padding:12px 10px 24px}.panel{padding:18px 14px}summary{padding:14px 12px;gap:8px}summary b{font-size:18px}.emoji{font-size:25px}.stage-grid{grid-template-columns:1fr;padding:0 10px 10px}.group-stars{font-size:12px}.answers{gap:12px}.answers input{width:85px}.answers label{gap:6px}.actions button{padding:12px 10px}.game-head{font-size:14px}}
+</style>
+</head>
+<body><main>
+<section id="home" aria-label="コース選択">
+<header class="intro"><div class="eyebrow">10問ずつ、できた！をふやそう</div><h1>➗ わりざんマスター</h1><p>大コース → 小コースをえらんでスタート。</p><div class="stats"><span>⭐ <b id="totalStars">0</b> / 75</span><span>クリア <b id="clearedStages">0</b> / 25</span><span>挑戦 <b id="totalPlays">0</b> 回</span><span>最高 <b id="bestStreak">0</b> 連続正解</span></div><div id="courseProgress" class="course-progress">小コースをクリアして★を集めよう！</div></header>
+<section class="town" aria-label="わりざんタウン">
+<div class="town-head"><h2>🏘️ わりざんタウン</h2><span id="townLevel" class="town-level">レベル1</span></div>
+<div class="town-picture">
+<svg viewBox="0 0 960 480" role="img" aria-label="星を集めると建物や公園が増えて発展する町">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9bdcff"/><stop offset="1" stop-color="#e9f8ff"/></linearGradient>
+<linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8fd47b"/><stop offset="1" stop-color="#5eae62"/></linearGradient>
+<linearGradient id="road" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9aa5ad"/><stop offset="1" stop-color="#707d86"/></linearGradient>
+<filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-opacity=".18"/></filter>
+</defs>
+<rect width="960" height="480" fill="url(#sky)"/>
+<circle class="town-sun" cx="820" cy="78" r="42" fill="#ffd85b"/><g class="cloud" fill="#fff" opacity=".9"><ellipse cx="135" cy="78" rx="48" ry="22"/><ellipse cx="178" cy="75" rx="37" ry="18"/><ellipse cx="105" cy="86" rx="28" ry="15"/></g><g class="cloud two" fill="#fff" opacity=".72"><ellipse cx="565" cy="54" rx="40" ry="18"/><ellipse cx="602" cy="57" rx="30" ry="15"/></g>
+<path d="M0 190 Q170 130 330 190 T650 176 T960 188 V480 H0Z" fill="#6fbe72"/>
+<path d="M0 245 Q200 185 405 238 T780 225 T960 230 V480 H0Z" fill="url(#grass)"/>
+<path d="M365 480 C390 390 445 315 510 264 C555 229 604 211 665 190 L760 218 C680 250 615 283 568 328 C520 375 494 425 482 480Z" fill="url(#road)"/>
+<path d="M431 480 C451 407 486 348 535 304" fill="none" stroke="#f7e69b" stroke-width="9" stroke-dasharray="26 24" opacity=".85"/>
+<!-- starter landscape -->
+<g class="build unlocked" data-need="0"><g fill="#4b9b50"><circle cx="90" cy="250" r="30"/><circle cx="135" cy="238" r="40"/><circle cx="190" cy="258" r="32"/></g><g fill="#fff3a8"><circle cx="52" cy="330" r="7"/><circle cx="86" cy="350" r="6"/><circle cx="160" cy="325" r="7"/></g></g>
+<!-- house -->
+<g class="build" data-need="5" filter="url(#shadow)"><rect x="92" y="265" width="150" height="120" rx="5" fill="#fff2c9" stroke="#355b54" stroke-width="5"/><path d="M72 278 L166 205 L263 278Z" fill="#ef775f" stroke="#355b54" stroke-width="5" stroke-linejoin="round"/><rect x="151" y="318" width="40" height="67" rx="4" fill="#9c684c"/><rect x="105" y="296" width="31" height="31" fill="#8bd2f2" stroke="#355b54" stroke-width="4"/><rect x="204" y="296" width="25" height="31" fill="#8bd2f2" stroke="#355b54" stroke-width="4"/></g>
+<!-- trees/park -->
+<g class="build" data-need="15"><g filter="url(#shadow)"><rect x="275" y="294" width="16" height="70" fill="#815a3d"/><circle cx="283" cy="273" r="43" fill="#5cad62"/><circle cx="315" cy="290" r="31" fill="#75c66d"/><rect x="258" y="372" width="98" height="12" rx="6" fill="#d79a58"/><rect x="271" y="382" width="9" height="26" fill="#8b6042"/><rect x="333" y="382" width="9" height="26" fill="#8b6042"/></g><circle cx="330" cy="340" r="7" fill="#ffd35d"/><circle cx="350" cy="348" r="6" fill="#ff8fa3"/></g>
+<!-- school -->
+<g class="build" data-need="30" filter="url(#shadow)"><rect x="555" y="214" width="182" height="153" rx="4" fill="#fff5dc" stroke="#355b54" stroke-width="5"/><rect x="577" y="241" width="36" height="30" fill="#8bd2f2" stroke="#355b54" stroke-width="3"/><rect x="628" y="241" width="36" height="30" fill="#8bd2f2" stroke="#355b54" stroke-width="3"/><rect x="679" y="241" width="36" height="30" fill="#8bd2f2" stroke="#355b54" stroke-width="3"/><rect x="577" y="291" width="36" height="30" fill="#8bd2f2" stroke="#355b54" stroke-width="3"/><rect x="679" y="291" width="36" height="30" fill="#8bd2f2" stroke="#355b54" stroke-width="3"/><rect x="630" y="305" width="34" height="62" fill="#b77b55"/><path d="M540 217 H752 L721 180 H571Z" fill="#5c83aa" stroke="#355b54" stroke-width="5"/><circle cx="646" cy="202" r="15" fill="#fff" stroke="#355b54" stroke-width="3"/><path d="M646 202v-9m0 9l8 4" stroke="#355b54" stroke-width="3"/></g>
+<!-- ferris wheel -->
+<g class="build" data-need="45" filter="url(#shadow)"><circle cx="820" cy="248" r="69" fill="none" stroke="#ef6b69" stroke-width="8"/><circle cx="820" cy="248" r="9" fill="#f4b64f"/><g stroke="#ef6b69" stroke-width="4"><path d="M820 179v138M751 248h138M771 199l98 98M869 199l-98 98"/></g><path d="M820 257l-48 126m48-126l48 126" stroke="#4f6f75" stroke-width="8"/><g fill="#ffd45f" stroke="#355b54" stroke-width="3"><rect x="807" y="164" width="26" height="18" rx="4"/><rect x="807" y="314" width="26" height="18" rx="4"/><rect x="735" y="239" width="26" height="18" rx="4"/><rect x="879" y="239" width="26" height="18" rx="4"/></g></g>
+<!-- castle -->
+<g class="build" data-need="60" filter="url(#shadow)"><rect x="350" y="176" width="130" height="145" fill="#dce8ef" stroke="#355b54" stroke-width="5"/><rect x="326" y="210" width="48" height="111" fill="#c6d9e4" stroke="#355b54" stroke-width="5"/><rect x="456" y="210" width="48" height="111" fill="#c6d9e4" stroke="#355b54" stroke-width="5"/><path d="M326 210v-34h12v14h12v-14h12v34M456 210v-34h12v14h12v-14h12v34" fill="#c6d9e4" stroke="#355b54" stroke-width="5"/><path d="M350 176v-36h14v15h16v-15h14v15h16v-15h14v15h16v-15h14v36" fill="#dce8ef" stroke="#355b54" stroke-width="5"/><rect x="397" y="260" width="36" height="61" rx="18" fill="#8b654f"/><path d="M415 140v-44l54 17-54 16" fill="#f4c64e" stroke="#355b54" stroke-width="4"/></g>
+<!-- small rewards: one visible change for each newly cleared course -->
+<g id="townDetails">
+<g class="town-detail" data-clear="1"><circle cx="65" cy="388" r="8" fill="#ff87a4"/><circle cx="78" cy="392" r="7" fill="#ffd45f"/><circle cx="91" cy="386" r="7" fill="#8d78d8"/></g>
+<g class="town-detail" data-clear="2"><rect x="250" y="402" width="54" height="8" rx="4" fill="#9b6a45"/><rect x="258" y="410" width="6" height="20" fill="#76523c"/><rect x="290" y="410" width="6" height="20" fill="#76523c"/></g>
+<g class="town-detail" data-clear="3"><path d="M35 300q18-30 36 0q-18 18-36 0" fill="#fff"/><circle cx="53" cy="298" r="5" fill="#ef6d72"/></g>
+<g class="town-detail" data-clear="4"><rect x="310" y="330" width="8" height="48" fill="#4f675f"/><circle cx="314" cy="326" r="12" fill="#ffe07a"/></g>
+<g class="town-detail" data-clear="5"><g fill="#5cad62"><circle cx="225" cy="335" r="24"/><circle cx="244" cy="344" r="19"/></g><rect x="232" y="350" width="8" height="38" fill="#815a3d"/></g>
+<g class="town-detail" data-clear="6"><path d="M115 410c20-18 40-18 60 0" fill="none" stroke="#f2c85b" stroke-width="8"/><circle cx="115" cy="410" r="7" fill="#ef6d72"/><circle cx="175" cy="410" r="7" fill="#62a8e5"/></g>
+<g class="town-detail" data-clear="7"><rect x="760" y="374" width="48" height="27" rx="8" fill="#5da6d8"/><circle cx="772" cy="402" r="8" fill="#394c54"/><circle cx="797" cy="402" r="8" fill="#394c54"/></g>
+<g class="town-detail" data-clear="8"><g fill="#fff"><circle cx="716" cy="414" r="8"/><circle cx="732" cy="408" r="7"/></g><path d="M718 423v20m14-27v27" stroke="#5c7d65" stroke-width="4"/></g>
+<g class="town-detail" data-clear="9"><path d="M882 348v55" stroke="#76523c" stroke-width="7"/><circle cx="882" cy="333" r="28" fill="#68b866"/><circle cx="902" cy="346" r="20" fill="#75c66d"/></g>
+<g class="town-detail" data-clear="10"><path d="M550 400q35-34 70 0" fill="none" stroke="#7cc7e8" stroke-width="12"/><circle cx="585" cy="399" r="8" fill="#fff"/></g>
+<g class="town-detail" data-clear="11"><rect x="80" y="210" width="7" height="44" fill="#555"/><path d="M87 212l42 12-42 12z" fill="#f1c84b"/></g>
+<g class="town-detail" data-clear="12"><g fill="#f6f0df" stroke="#355b54" stroke-width="2"><circle cx="324" cy="420" r="9"/><circle cx="342" cy="420" r="9"/></g></g>
+<g class="town-detail" data-clear="13"><path d="M690 392h55" stroke="#8b6042" stroke-width="7"/><path d="M697 392v24m40-24v24" stroke="#8b6042" stroke-width="5"/></g>
+<g class="town-detail" data-clear="14"><g fill="#ff9aae"><circle cx="390" cy="382" r="7"/><circle cx="405" cy="389" r="7"/><circle cx="420" cy="380" r="7"/></g></g>
+<g class="town-detail" data-clear="15"><rect x="520" y="215" width="8" height="35" fill="#555"/><path d="M528 216l30 9-30 9z" fill="#62a8e5"/></g>
+<g class="town-detail" data-clear="16"><circle cx="930" cy="390" r="15" fill="#ffd45f"/><path d="M930 405v30m-16-17h32" stroke="#7b5a42" stroke-width="5"/></g>
+<g class="town-detail" data-clear="17"><path d="M205 430c18-25 36-25 54 0" fill="none" stroke="#d6a7e8" stroke-width="7"/></g>
+<g class="town-detail" data-clear="18"><rect x="610" y="405" width="42" height="24" rx="5" fill="#f2b75e"/><path d="M620 405v-12h22v12" fill="none" stroke="#76523c" stroke-width="5"/></g>
+<g class="town-detail" data-clear="19"><circle cx="845" cy="410" r="10" fill="#fff"/><circle cx="858" cy="414" r="8" fill="#fff"/><path d="M846 422v18m12-18v18" stroke="#555" stroke-width="3"/></g>
+<g class="town-detail" data-clear="20"><path d="M445 400v-45" stroke="#555" stroke-width="5"/><circle cx="445" cy="350" r="10" fill="#ffe07a"/></g>
+<g class="town-detail" data-clear="21"><g fill="#ef6d72"><circle cx="280" cy="445" r="6"/><circle cx="294" cy="443" r="6"/><circle cx="308" cy="447" r="6"/></g></g>
+<g class="town-detail" data-clear="22"><path d="M735 335l12-22 12 22z" fill="#f4c64e"/><rect x="744" y="335" width="6" height="22" fill="#76523c"/></g>
+<g class="town-detail" data-clear="23"><circle cx="160" cy="445" r="14" fill="#7cc7e8"/><path d="M146 445h28" stroke="#fff" stroke-width="3"/></g>
+<g class="town-detail" data-clear="24"><path d="M655 445q20-28 40 0" fill="none" stroke="#ff8fa3" stroke-width="8"/></g>
+<g class="town-detail" data-clear="25"><g fill="#ffd34f" stroke="#8d681d" stroke-width="2"><path d="M900 205l8 17 19 2-14 13 4 19-17-9-17 9 4-19-14-13 19-2z"/></g></g>
+</g>
+<!-- crown monument -->
+<g class="build" data-need="75" filter="url(#shadow)"><ellipse cx="500" cy="401" rx="74" ry="22" fill="#d9d4c5"/><rect x="470" y="338" width="60" height="64" rx="6" fill="#ece6d5"/><path d="M462 330l15-48 25 29 25-29 15 48z" fill="#ffd34f" stroke="#8d681d" stroke-width="5"/><circle cx="477" cy="284" r="6" fill="#62a8e5"/><circle cx="502" cy="310" r="6" fill="#ef6d72"/><circle cx="527" cy="284" r="6" fill="#62a8e5"/></g>
+</svg>
+<div class="town-caption">★を集めるほど、景色がにぎやかに！</div>
+</div>
+<div class="town-info"><progress id="townMeter" class="town-meter" value="0" max="75" aria-label="わりざんタウンの成長"></progress><p id="townMessage" class="town-msg">★を集めると町が育つよ。</p><p class="town-grow-note">初めて小コースをクリアするたびに、町にも小さな変化が1つ増えます。</p></div>
+</section>
+<div id="recommend" class="recommend"><strong>🎯 つぎのおすすめ</strong><span id="recommendText">好きな小コースから始めよう。</span><br><button id="recommendBtn" type="button">おすすめコースをひらく</button></div>
+<p id="startup" class="notice" role="status">準備中です。この表示が消えない場合は、ファイルのプレビューではなく、JavaScriptが使えるブラウザで開いてください。</p>
+<noscript><p class="notice">問題を始めるにはJavaScriptを有効にしてください。コース一覧は下から確認できます。</p></noscript>
+<h2>大コースをえらぼう</h2><p class="small muted">どの小コースからでも遊べます。★は6問正解で1つ、8問で2つ、10問で3つ。</p>
+<label class="setting"><input id="includeRemainder" type="checkbox"><span>チャレンジの「文章題ミックス」「ボス」にも、あまりを出す<br><small>まだ習っていないときは、チェックなしで遊べます。「🍎 あまり」と「あまりミックス」には、いつでもあまりが出ます。</small></span></label>
+<div id="courses"><details data-group="first"><summary><span class="emoji">🌱</span><span><b>はじめて</b><small>わり算の意味からスタート</small></span><span class="group-stars">0/15★</span></summary><div class="stage-grid"><button type="button" class="stage" data-stage="first12"><b>🍀 商1〜2</b><span>小さい商でゆっくり</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="first35"><b>🌼 商3〜5</b><span>商3・4・5を練習</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="equal"><b>🎁 同じ数ずつ</b><span>等分除の文章題</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="group"><b>📦 いくつ分</b><span>包含除の文章題</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="firstmix"><b>⭐ はじめてミックス</b><span>商1〜5をまとめて</span><span class="record">☆☆☆　未挑戦</span></button></div></details>
+<details data-group="kuku"><summary><span class="emoji">⭐</span><span><b>九九わり算</b><small>九九を使う割り算を攻略</small></span><span class="group-stars">0/15★</span></summary><div class="stage-grid"><button type="button" class="stage" data-stage="d23"><b>2️⃣ ÷2・÷3</b><span>2と3でわる</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="d45"><b>4️⃣ ÷4・÷5</b><span>4と5でわる</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="d67"><b>6️⃣ ÷6・÷7</b><span>6と7でわる</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="d89"><b>8️⃣ ÷8・÷9</b><span>8と9でわる</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="kukumix"><b>🌟 九九ミックス</b><span>÷2〜÷9を全部</span><span class="record">☆☆☆　未挑戦</span></button></div></details>
+<details data-group="big"><summary><span class="emoji">🚀</span><span><b>大きな商</b><small>商が10以上のわり算</small></span><span class="group-stars">0/15★</span></summary><div class="stage-grid"><button type="button" class="stage" data-stage="q1012"><b>🔟 商10〜12</b><span>まずは10・11・12</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="q1315"><b>🛰️ 商13〜15</b><span>13・14・15</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="q1620"><b>🌙 商16〜20</b><span>16〜20に挑戦</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="bigstory"><b>📖 大きな商の文章題</b><span>場面から式を考える</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="bigmix"><b>🚀 大きな商ミックス</b><span>商10〜20を全部</span><span class="record">☆☆☆　未挑戦</span></button></div></details>
+<details data-group="remain"><summary><span class="emoji">🍎</span><span><b>あまり</b><small>あまりのある割り算</small></span><span class="group-stars">0/15★</span></summary><div class="stage-grid"><button type="button" class="stage" data-stage="r12"><b>🍏 あまり1〜2</b><span>小さいあまりから</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="r34"><b>🍊 あまり3〜4</b><span>あまり3・4</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="rany"><b>🧺 いろいろなあまり</b><span>あまりを見分けよう</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="rstory"><b>📖 あまりの文章題</b><span>文章から考える</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="rmix"><b>🍎 あまりミックス</b><span>まとめて10問</span><span class="record">☆☆☆　未挑戦</span></button></div></details>
+<details data-group="challenge"><summary><span class="emoji">👑</span><span><b>チャレンジ</b><small>いろいろな問題に挑戦</small></span><span class="group-stars">0/15★</span></summary><div class="stage-grid"><button type="button" class="stage" data-stage="c1"><b>⚡ 九九スピード</b><span>九九範囲をミックス</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="c2"><b>🛸 商10〜20</b><span>大きな商をミックス</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="c3"><b>🍎 あまりミックス</b><span>あまりありをミックス</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="c4"><b>📚 文章題ミックス</b><span>等分除・包含除（あまりは選べます）</span><span class="record">☆☆☆　未挑戦</span></button>
+<button type="button" class="stage" data-stage="boss"><b>👑 ボスチャレンジ</b><span>商1〜30（あまりは選べます）</span><span class="record">☆☆☆　未挑戦</span></button></div></details></div>
+</section>
+<section id="game" class="panel" aria-label="10問チャレンジ" hidden>
+<header class="game-head"><p id="courseName"></p><span id="qnum" class="counter"></span></header>
+<progress id="progress" value="0" max="10" aria-label="回答済みの問題数"></progress>
+<p id="story" class="story"></p><div id="problem" class="problem"></div>
+<form id="answerForm" novalidate autocomplete="off">
+<div class="answers"><label>答え<input id="ans" type="text" inputmode="numeric" enterkeyhint="done" maxlength="12" autocapitalize="off" spellcheck="false"></label><label id="remWrap" hidden>あまり<input id="rem" type="text" inputmode="numeric" enterkeyhint="done" maxlength="12" autocapitalize="off" spellcheck="false"></label></div>
+<div class="actions"><button id="check" class="primary" type="submit">こたえあわせ</button><button id="next" class="primary" type="button" hidden>つぎの問題</button><button id="hint" type="button">💡 ヒント</button></div>
+</form>
+<div id="hintbox" class="hint" hidden></div><div id="supportCard" class="support-card" hidden><div class="support-title">👀 目で見て考えよう</div><div id="visual" class="visual"></div><div id="supportText" class="small"></div></div><div id="retryNote" class="retry-note"></div><div id="msg" class="feedback" role="status" aria-live="polite"></div>
+<button id="quit" class="back" type="button">小コースにもどる</button><p class="small muted" style="text-align:center">途中でもどると、今回の点数は記録しません。</p>
+</section>
+<section id="result" class="panel result" aria-label="結果" hidden>
+<h2 id="resultHeading" tabindex="-1">10問チャレンジ終了！</h2><p id="resultCourse"></p><div class="score"><span id="score">0</span><span style="font-size:26px"> / 10</span></div><div id="celebrate" class="celebrate" aria-hidden="true"></div><div id="resultStars" class="stars"></div><p id="resultMessage"></p><div class="achievement"><strong id="achievementTitle">今回の記録</strong><p id="achievementText"></p><p id="nextGoal" class="next-goal"></p></div><div id="growthCard" class="growth-card" hidden><div id="growthIcon" class="growth-icon">🌳</div><strong id="growthTitle">タウンが成長した！</strong><p id="growthText"></p><button id="seeTown" type="button">🏘️ 成長した町を見る</button></div><div class="result-stats"><p>自己ベスト<br><b id="rBest"></b></p><p>今回の連続正解<br><b id="rStreak"></b></p></div>
+<div class="actions"><button id="again" class="primary" type="button">もう一度チャレンジ</button><button id="stageBtn" type="button">小コースをえらぶ</button></div><details class="review"><summary>今回の答えを見直す</summary><ol id="reviewList"></ol></details>
+</section>
+<p id="storageNotice" class="notice" role="status" hidden></p>
+<footer class="footer">わりざんマスター 3.5.0<br>ログイン不要・外部通信なし・名前やIDの入力なし<br>記録はこの端末の同じブラウザに保存されます。</footer>
+</main>
+<script>
+'use strict';
+(() => {
+const groups = [
+  {
+    "id": "first",
+    "ico": "🌱",
+    "name": "はじめて",
+    "desc": "わり算の意味からスタート",
+    "stages": [
+      {
+        "id": "first12",
+        "ico": "🍀",
+        "name": "商1〜2",
+        "desc": "小さい商でゆっくり",
+        "min": 1,
+        "max": 2,
+        "story": true
+      },
+      {
+        "id": "first35",
+        "ico": "🌼",
+        "name": "商3〜5",
+        "desc": "商3・4・5を練習",
+        "min": 3,
+        "max": 5,
+        "story": true
+      },
+      {
+        "id": "equal",
+        "ico": "🎁",
+        "name": "同じ数ずつ",
+        "desc": "等分除の文章題",
+        "min": 1,
+        "max": 5,
+        "kind": "equal",
+        "story": true
+      },
+      {
+        "id": "group",
+        "ico": "📦",
+        "name": "いくつ分",
+        "desc": "包含除の文章題",
+        "min": 1,
+        "max": 5,
+        "kind": "group",
+        "story": true
+      },
+      {
+        "id": "firstmix",
+        "ico": "⭐",
+        "name": "はじめてミックス",
+        "desc": "商1〜5をまとめて",
+        "min": 1,
+        "max": 5,
+        "story": true
+      }
+    ]
+  },
+  {
+    "id": "kuku",
+    "ico": "⭐",
+    "name": "九九わり算",
+    "desc": "九九を使う割り算を攻略",
+    "stages": [
+      {
+        "id": "d23",
+        "ico": "2️⃣",
+        "name": "÷2・÷3",
+        "desc": "2と3でわる",
+        "min": 1,
+        "max": 9,
+        "divs": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "d45",
+        "ico": "4️⃣",
+        "name": "÷4・÷5",
+        "desc": "4と5でわる",
+        "min": 1,
+        "max": 9,
+        "divs": [
+          4,
+          5
+        ]
+      },
+      {
+        "id": "d67",
+        "ico": "6️⃣",
+        "name": "÷6・÷7",
+        "desc": "6と7でわる",
+        "min": 1,
+        "max": 9,
+        "divs": [
+          6,
+          7
+        ]
+      },
+      {
+        "id": "d89",
+        "ico": "8️⃣",
+        "name": "÷8・÷9",
+        "desc": "8と9でわる",
+        "min": 1,
+        "max": 9,
+        "divs": [
+          8,
+          9
+        ]
+      },
+      {
+        "id": "kukumix",
+        "ico": "🌟",
+        "name": "九九ミックス",
+        "desc": "÷2〜÷9を全部",
+        "min": 1,
+        "max": 9,
+        "divs": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "story": true
+      }
+    ]
+  },
+  {
+    "id": "big",
+    "ico": "🚀",
+    "name": "大きな商",
+    "desc": "商が10以上のわり算",
+    "stages": [
+      {
+        "id": "q1012",
+        "ico": "🔟",
+        "name": "商10〜12",
+        "desc": "まずは10・11・12",
+        "min": 10,
+        "max": 12
+      },
+      {
+        "id": "q1315",
+        "ico": "🛰️",
+        "name": "商13〜15",
+        "desc": "13・14・15",
+        "min": 13,
+        "max": 15
+      },
+      {
+        "id": "q1620",
+        "ico": "🌙",
+        "name": "商16〜20",
+        "desc": "16〜20に挑戦",
+        "min": 16,
+        "max": 20
+      },
+      {
+        "id": "bigstory",
+        "ico": "📖",
+        "name": "大きな商の文章題",
+        "desc": "場面から式を考える",
+        "min": 10,
+        "max": 20,
+        "story": true
+      },
+      {
+        "id": "bigmix",
+        "ico": "🚀",
+        "name": "大きな商ミックス",
+        "desc": "商10〜20を全部",
+        "min": 10,
+        "max": 20,
+        "story": true
+      }
+    ]
+  },
+  {
+    "id": "remain",
+    "ico": "🍎",
+    "name": "あまり",
+    "desc": "あまりのある割り算",
+    "stages": [
+      {
+        "id": "r12",
+        "ico": "🍏",
+        "name": "あまり1〜2",
+        "desc": "小さいあまりから",
+        "min": 1,
+        "max": 9,
+        "remain": true,
+        "rems": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "r34",
+        "ico": "🍊",
+        "name": "あまり3〜4",
+        "desc": "あまり3・4",
+        "min": 1,
+        "max": 9,
+        "remain": true,
+        "rems": [
+          3,
+          4
+        ]
+      },
+      {
+        "id": "rany",
+        "ico": "🧺",
+        "name": "いろいろなあまり",
+        "desc": "あまりを見分けよう",
+        "min": 1,
+        "max": 9,
+        "remain": true
+      },
+      {
+        "id": "rstory",
+        "ico": "📖",
+        "name": "あまりの文章題",
+        "desc": "文章から考える",
+        "min": 1,
+        "max": 9,
+        "remain": true,
+        "story": true
+      },
+      {
+        "id": "rmix",
+        "ico": "🍎",
+        "name": "あまりミックス",
+        "desc": "まとめて10問",
+        "min": 1,
+        "max": 9,
+        "remain": true,
+        "story": true
+      }
+    ]
+  },
+  {
+    "id": "challenge",
+    "ico": "👑",
+    "name": "チャレンジ",
+    "desc": "いろいろな問題に挑戦",
+    "stages": [
+      {
+        "id": "c1",
+        "ico": "⚡",
+        "name": "九九スピード",
+        "desc": "九九範囲をミックス",
+        "min": 1,
+        "max": 9
+      },
+      {
+        "id": "c2",
+        "ico": "🛸",
+        "name": "商10〜20",
+        "desc": "大きな商をミックス",
+        "min": 10,
+        "max": 20
+      },
+      {
+        "id": "c3",
+        "ico": "🍎",
+        "name": "あまりミックス",
+        "desc": "あまりありをミックス",
+        "min": 1,
+        "max": 12,
+        "remain": true
+      },
+      {
+        "id": "c4",
+        "ico": "📚",
+        "name": "文章題ミックス",
+        "desc": "等分除・包含除（あまりは選べます）",
+        "min": 1,
+        "max": 15,
+        "story": true,
+        "mixRemain": true
+      },
+      {
+        "id": "boss",
+        "ico": "👑",
+        "name": "ボスチャレンジ",
+        "desc": "商1〜30（あまりは選べます）",
+        "min": 1,
+        "max": 30,
+        "story": true,
+        "mixRemain": true,
+        "balanceHigh": true
+      }
+    ]
+  }
+];
+// One controller owns navigation and grading; no inline event handlers.
+const $ = id => document.getElementById(id);
+const KEY = 'warizanMasterStableV3';
+const LEGACY_KEY = 'warizanMasterGameV23';
+const allStages = groups.flatMap(g => g.stages.map(c => ({...c, groupId:g.id, groupName:g.name})));
+const stageById = new Map(allStages.map(c => [c.id,c]));
+const isObject = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+function bounded(x,max) {
+  if (typeof x !== 'number' && typeof x !== 'string') return 0;
+  const n = Number(x);
+  return Number.isSafeInteger(n) && n >= 0 ? Math.min(n,max) : 0;
+}
+function cleanStore(raw) {
+  const source = isObject(raw) ? raw : {};
+  const records = isObject(source.records) ? source.records : {};
+  const out = {version:3,bestStreak:bounded(source.bestStreak,10),records:{}};
+  for (const c of allStages) {
+    const r = isObject(records[c.id]) ? records[c.id] : {};
+    out.records[c.id] = {best:bounded(r.best,10),stars:bounded(r.stars,3),plays:bounded(r.plays,1000000000)};
+  }
+  return out;
+}
+function storageWarning(text) { $('storageNotice').textContent=text; $('storageNotice').hidden=false; }
+function readStore() {
+  try {
+    for (const key of [KEY,LEGACY_KEY]) {
+      const text = localStorage.getItem(key);
+      if (text === null) continue;
+      try {
+        const parsed = JSON.parse(text);
+        if (isObject(parsed) && isObject(parsed.records)) return cleanStore(parsed);
+      } catch (_) { /* A malformed old entry must never prevent play. */ }
+    }
+  } catch (_) { storageWarning('このブラウザでは記録を保存できません。問題は遊べますが、閉じると今回の記録は残りません。'); }
+  return cleanStore(null);
+}
+let records = readStore();
+let view = 'home';
+let round = null;
+let composing = false;
+function shuffle(items) {
+  const out = items.slice();
+  for (let i=out.length-1;i>0;i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [out[i],out[j]]=[out[j],out[i]];
+  }
+  return out;
+}
+function range(min,max) { return Array.from({length:max-min+1},(_,i)=>min+i); }
+// Sample without replacement in each cycle: every quotient appears equally often
+// (difference <= 1). Boss deliberately draws five small and five large quotients.
+function balancedSample(pool,count) {
+  const result=[];
+  while(result.length<count) result.push(...shuffle(pool).slice(0,count-result.length));
+  return result;
+}
+function makeDeck(c,includeRemainder=false) {
+  let quotients;
+  if(c.balanceHigh) quotients=shuffle([...balancedSample(range(c.min,9),5),...balancedSample(range(10,c.max),5)]);
+  else quotients=shuffle(balancedSample(range(c.min,c.max),10));
+  const counts={};
+  const used=new Set();
+  return quotients.map((a,i)=>{
+    const hasRemainder=Boolean(c.remain || (c.mixRemain && includeRemainder && i%3===2));
+    const kind=hasRemainder?'remain':c.kind||(c.story?(i%2?'equal':'group'):'basic');
+    let divisors=(c.divs||range(2,9)).filter(d=>!hasRemainder||!c.rems||c.rems.some(r=>r>0&&r<d));
+    const unused=divisors.filter(d=>!used.has(`${a}:${d}`));
+    if(unused.length) divisors=unused;
+    const smallest=Math.min(...divisors.map(d=>counts[d]||0));
+    const d=shuffle(divisors.filter(d=>(counts[d]||0)===smallest))[0];
+    counts[d]=(counts[d]||0)+1; used.add(`${a}:${d}`);
+    const r=hasRemainder?shuffle((c.rems||range(1,d-1)).filter(r=>r<d))[0]:0;
+    return {a,d,r,n:a*d+r,kind};
+  });
+}
+function numberOf(raw) {
+  const text=String(raw).normalize('NFKC').trim();
+  if(!/^\d+$/.test(text)) return null;
+  const n=Number(text);
+  return Number.isSafeInteger(n)&&n>=0?n:null;
+}
+function show(nextView) {
+  view=nextView;
+  for(const id of ['home','game','result']) $(id).hidden=id!==view;
+  window.scrollTo(0,0);
+}
+function townMilestone(stars) {
+  const steps=[
+    {need:0,name:'はじまりの広場'},{need:5,name:'おうち'},{need:15,name:'みどりの公園'},
+    {need:30,name:'わりざん学校'},{need:45,name:'わくわく遊園地'},{need:60,name:'チャレンジ城'},{need:75,name:'マスタークラウン'}
+  ];
+  let current=steps[0],next=null;
+  for(const step of steps){if(stars>=step.need) current=step; else {next=step;break;}}
+  return {current,next,level:steps.indexOf(current)+1};
+}
+function recommendedStage() {
+  const notCleared=allStages.find(c=>records.records[c.id].stars===0);
+  if(notCleared) return notCleared;
+  const notPerfect=allStages.find(c=>records.records[c.id].stars<3);
+  return notPerfect||allStages[allStages.length-1];
+}
+function openRecommended() {
+  if(view!=='home') return;
+  const c=recommendedStage(),detail=document.querySelector(`[data-group="${c.groupId}"]`),button=document.querySelector(`[data-stage="${c.id}"]`);
+  document.querySelectorAll('#courses details').forEach(d=>d.open=d===detail);
+  detail.open=true; button.scrollIntoView({behavior:'smooth',block:'center'}); button.focus({preventScroll:true});
+}
+function renderRecords() {
+  let stars=0,plays=0,cleared=0;
+  for(const g of groups) {
+    let groupStars=0;
+    for(const c of g.stages) {
+      const r=records.records[c.id]; groupStars+=r.stars; plays+=r.plays;
+      const button=document.querySelector(`[data-stage="${c.id}"]`);
+      const label=button.querySelector('.record');
+      label.textContent='★'.repeat(r.stars)+'☆'.repeat(3-r.stars)+(r.plays?`　自己ベスト ${r.best}/10`:'　未挑戦');
+      button.classList.toggle('cleared',r.stars>0); button.classList.toggle('perfect',r.stars===3);
+      if(r.stars>0) cleared++;
+    }
+    stars+=groupStars;
+    document.querySelector(`[data-group="${g.id}"] .group-stars`).textContent=`${groupStars}/15★`;
+  }
+  $('totalStars').textContent=stars; $('clearedStages').textContent=cleared; $('totalPlays').textContent=plays; $('bestStreak').textContent=records.bestStreak;
+  $('townMeter').value=stars;
+  document.querySelectorAll('.build').forEach(item=>item.classList.toggle('unlocked',stars>=Number(item.dataset.need)));
+  document.querySelectorAll('.town-detail').forEach(item=>item.classList.toggle('unlocked',cleared>=Number(item.dataset.clear)));
+  const town=townMilestone(stars); $('townLevel').textContent=`レベル${town.level}・${town.current.name}`;
+  $('townMessage').textContent=town.next?`次は ★${town.next.need} で「${town.next.name}」が登場！ あと${town.next.need-stars}こ。`:'🎉 わりざんタウン完成！ 75★コンプリート！';
+  const rec=recommendedStage(),rr=records.records[rec.id];
+  $('recommendText').textContent=cleared===25&&stars===75?'全コース★★★！ ボスチャレンジで記録に挑戦しよう。':rr.stars===0?`まだクリアしていない「${rec.groupName} › ${rec.name}」がおすすめ。`:`「${rec.groupName} › ${rec.name}」を★★★にしてみよう。`;
+  $('recommendBtn').textContent=`${rec.ico} ${rec.name}をひらく`;
+  $('courseProgress').textContent=cleared===25?'🎉 25コースクリア！ 全コース達成！':cleared===0?'まずは好きな小コースに挑戦しよう！':`あと ${25-cleared} コースで全コースクリア！　★はあと ${75-stars} こ集められるよ。`;
+}
+function home() {
+  const c=round&&round.course;
+  round=null; composing=false; renderRecords(); show('home');
+  if(c) {
+    document.querySelector(`[data-group="${c.groupId}"]`).open=true;
+    document.querySelector(`[data-stage="${c.id}"]`).focus({preventScroll:true});
+    document.querySelector(`[data-stage="${c.id}"]`).scrollIntoView({block:'nearest'});
+  }
+}
+function start(c) {
+  if(view==='game') return;
+  round={course:c,deck:makeDeck(c,$('includeRemainder').checked),index:0,score:0,streak:0,maxStreak:0,phase:'answering',saved:false,answers:[],gradedAt:0,wrong:[],retryCount:0};
+  show('game'); renderQuestion();
+}
+function renderQuestion() {
+  const q=round.deck[round.index]; round.phase='answering'; composing=false;
+  $('courseName').textContent=round.course.groupName+' › '+round.course.name;
+  $('qnum').textContent=round.index<10?`${round.index+1} / 10`:`やり直し ${round.index-9} / ${round.retryCount}`;
+  $('progress').max=Math.max(10,round.deck.length); $('progress').value=round.index;
+  $('story').textContent=q.kind==='equal'?`${q.n}こを ${q.d}人に同じ数ずつ分けます。1人分は何こ？`:q.kind==='group'?`${q.n}こを ${q.d}こずつに分けます。何グループできる？`:q.kind==='remain'?`${q.n}こを ${q.d}こずつに分けます。何グループできて、何こあまる？`:'';
+  $('problem').textContent=`${q.n} ÷ ${q.d} ＝ ？`;
+  for(const id of ['ans','rem']) { $(id).value=''; $(id).readOnly=false; $(id).removeAttribute('aria-invalid'); }
+  $('remWrap').hidden=q.kind!=='remain'; $('rem').disabled=q.kind!=='remain';
+  $('check').hidden=false; $('next').hidden=true;
+  // A second tap on Next must not hit the newly displayed Check button.
+  // A brief disabled period affects pointer clicks only; a fresh Enter still works.
+  $('check').disabled=round.index>0;
+  if($('check').disabled) {
+    const activeRound=round, activeIndex=round.index;
+    setTimeout(()=>{if(round===activeRound&&round.index===activeIndex&&round.phase==='answering') $('check').disabled=false;},250);
+  }
+  $('next').textContent=(round.index===9&&round.wrong.length===0)?'けっかを見る':round.index>=9?'もう一度やる':'つぎの問題';
+  $('msg').textContent=''; $('hintbox').hidden=true; $('supportCard').hidden=true;
+  $('retryNote').textContent=round.index>=10?'🔁 まちがえた問題にもう一度チャレンジ':' ';
+  $('ans').focus({preventScroll:true});
+}
+function grade() {
+  if(view!=='game'||!round||round.phase!=='answering'||composing) return;
+  const q=round.deck[round.index];
+  const a=numberOf($('ans').value),r=q.kind==='remain'?numberOf($('rem').value):0;
+  if(a===null||r===null) {
+    const input=a===null?$('ans'):$('rem');
+    $('msg').textContent=(a===null?'答え':'あまり')+'に、0以上の整数を入れてね。';
+    input.setAttribute('aria-invalid','true'); input.focus(); return;
+  }
+  // Commit grading before any rendering. Repeated submissions are then inert.
+  round.phase='graded'; round.gradedAt=performance.now();
+  const ok=a===q.a&&r===q.r;
+  round.answers.push({a,r,ok});
+  if(ok) {if(round.index<10) round.score++;round.streak++;round.maxStreak=Math.max(round.maxStreak,round.streak);}
+  else {round.streak=0;if(round.index<10) round.wrong.push({...q});}
+  $('msg').textContent=ok?'⭕ せいかい！':`答えは ${q.a}${q.kind==='remain'?' あまり '+q.r:''}。次の問題もやってみよう！`;
+  $('ans').readOnly=true; $('rem').readOnly=true;
+  $('check').hidden=true; $('next').hidden=false; $('progress').value=round.index+1;
+  $('next').focus({preventScroll:true});
+}
+function advance() {
+  if(view!=='game'||!round||round.phase!=='graded'||performance.now()-round.gradedAt<300) return;
+  round.phase='advancing';
+  if(round.index===9) {
+    if(round.wrong.length) {
+      round.deck.push(...shuffle(round.wrong)); round.retryCount=round.wrong.length; round.wrong=[];
+      round.index++; renderQuestion();
+    } else finish();
+  } else if(round.index>=10) {
+    if(round.index===round.deck.length-1) finish();
+    else {round.index++;renderQuestion();}
+  } else {round.index++;renderQuestion();}
+}
+function finish() {
+  if(!round||round.saved||round.phase!=='advancing') return;
+  round.saved=true; round.phase='finished';
+  const earned=round.score===10?3:round.score>=8?2:round.score>=6?1:0;
+  // Merge valid on-device records before writing; legacy data is never deleted.
+  const stored=readStore();
+  for(const c of allStages) for(const field of ['best','stars','plays']) records.records[c.id][field]=Math.max(records.records[c.id][field],stored.records[c.id][field]);
+  records.bestStreak=Math.max(records.bestStreak,stored.bestStreak,round.maxStreak);
+  const r=records.records[round.course.id],previousBest=r.best,previousStars=r.stars,firstClear=previousStars===0&&earned>0;
+  r.plays=Math.min(1000000000,r.plays+1);r.best=Math.max(r.best,round.score);r.stars=Math.max(r.stars,earned);
+  let saved=true;
+  try {localStorage.setItem(KEY,JSON.stringify(records));}
+  catch (_) { saved=false;storageWarning('記録を端末に保存できませんでした。この画面では記録を保ちますが、閉じると今回の記録は残りません。'); }
+  if(saved) $('storageNotice').hidden=true;
+  $('resultCourse').textContent=round.course.groupName+' › '+round.course.name;
+  $('score').textContent=round.score;
+  $('resultStars').textContent='★'.repeat(earned)+'☆'.repeat(3-earned);
+  $('resultStars').setAttribute('aria-label',`今回の星 ${earned}個`);
+  const bestUpdated=round.score>previousBest, starsUpdated=earned>previousStars;
+  $('resultMessage').textContent=bestUpdated?'自己ベスト更新！':round.score===10?'全問正解！':starsUpdated?'★が増えた！':earned?'クリア！ 次は自己ベストをねらおう！':'あと少し。もう一度やってみよう！';
+  $('celebrate').textContent=round.score===10?'🎉 👑 🎉':bestUpdated?'✨ 🏆 ✨':starsUpdated?'⭐ ✨ ⭐':'';
+  $('achievementTitle').textContent=round.score===10?'パーフェクト！':bestUpdated?'🏆 自己ベスト更新！':starsUpdated?'⭐ 新しい★をゲット！':'今回の記録';
+  const gained=Math.max(0,earned-previousStars);
+  const starsBefore=allStages.reduce((sum,c)=>sum+(c.id===round.course.id?previousStars:records.records[c.id].stars),0);
+  const starsAfter=allStages.reduce((sum,c)=>sum+records.records[c.id].stars,0);
+  const beforeTown=townMilestone(starsBefore),afterTown=townMilestone(starsAfter);
+  if(afterTown.level>beforeTown.level){$('celebrate').textContent='🎉 🏘️ ⭐'; $('achievementTitle').textContent='🏘️ タウンが成長！'; $('achievementText').textContent=`「${afterTown.current.name}」がタウンに登場したよ！`; }
+  if(afterTown.level===beforeTown.level) $('achievementText').textContent=gained?`この小コースの★が ${previousStars} → ${earned} にアップ！`:`今回 ${round.score}問正解、最大 ${round.maxStreak}問連続正解でした。`;
+  $('nextGoal').textContent=earned<1?'次の目標：6問正解で ★1':earned<2?'次の目標：8問正解で ★★':earned<3?'次の目標：10問正解で ★★★':'★★★達成！ この小コースはコンプリート！';
+  const growth=$('growthCard');
+  if(firstClear){
+    const totalCleared=allStages.reduce((sum,c)=>sum+(records.records[c.id].stars>0?1:0),0);
+    const rewards=['🌷 花が咲いた！','🪑 ベンチができた！','🐦 鳥がやってきた！','💡 街灯がついた！','🌳 木が育った！','🌈 遊び場ができた！','🚙 車が走り始めた！','🕊️ 広場がにぎやかに！','🌲 大きな木が増えた！','⛲ 水辺ができた！'];
+    const reward=rewards[(totalCleared-1)%rewards.length];
+    $('growthIcon').textContent=reward.split(' ')[0]; $('growthTitle').textContent='🏘️ タウンが成長した！';
+    $('growthText').textContent=`初クリア！ ${reward}（${totalCleared}/25コース）`; growth.hidden=false;
+  } else if(afterTown.level>beforeTown.level){
+    $('growthIcon').textContent='🏗️'; $('growthTitle').textContent='大きな施設が完成！';
+    $('growthText').textContent=`「${afterTown.current.name}」がタウンに登場したよ！`; growth.hidden=false;
+  } else growth.hidden=true;
+
+  $('rBest').textContent=r.best+' / 10';$('rStreak').textContent=round.maxStreak+' 問';
+  $('reviewList').replaceChildren();
+  round.deck.slice(0,10).forEach((q,i)=>{const li=document.createElement('li');li.textContent=`${round.answers[i].ok?'○':'×'} ${q.n} ÷ ${q.d} ＝ ${q.a}${q.kind==='remain'?' あまり '+q.r:''}`;$('reviewList').append(li);}); if(round.retryCount){const li=document.createElement('li');li.textContent=`🔁 まちがえた ${round.retryCount} 問を最後にもう一度練習しました。`;$('reviewList').append(li);}
+  document.querySelector('#result details').open=false;
+  show('result'); $('resultHeading').focus({preventScroll:true});
+}
+$('recommendBtn').addEventListener('click',openRecommended);
+$('courses').addEventListener('click',event=>{
+  const button=event.target.closest('button[data-stage]');
+  if(!button||view!=='home') return;
+  const c=stageById.get(button.dataset.stage); if(c) start(c);
+});
+$('answerForm').addEventListener('submit',event=>{event.preventDefault();grade();});
+$('next').addEventListener('click',advance);
+$('answerForm').addEventListener('compositionstart',()=>{composing=true;});
+$('answerForm').addEventListener('compositionend',()=>{composing=false;});
+// Keyboard and pointer share the same controller. Ignore IME confirmation and held Enter.
+$('answerForm').addEventListener('keydown',event=>{
+  if(event.key!=='Enter') return;
+  event.preventDefault();
+  if(event.repeat||event.isComposing||composing||event.keyCode===229) return;
+  if(round&&round.phase==='graded') advance();else grade();
+});
+$('hint').addEventListener('click',()=>{
+  if(!round||view!=='game') return;
+  const q=round.deck[round.index];$('hintbox').hidden=false;
+  $('hintbox').textContent=q.kind==='remain'?`${q.d} × □ が ${q.n} をこえない、一番大きな整数をさがそう。あまりは ${q.n} − ${q.d} × □。`:`${q.d} × □ ＝ ${q.n} になる数をさがそう。`;
+  const visual=$('visual'); visual.replaceChildren(); $('supportCard').hidden=false;
+  const groupsToShow=Math.min(q.a,12);
+  for(let i=0;i<groupsToShow;i++){const box=document.createElement('span');box.className='visual-group';const dots=Math.min(q.d,9);box.textContent='●'.repeat(dots);visual.append(box);}
+  if(q.a>12){const more=document.createElement('span');more.className='visual-group';more.textContent=`… ${q.a}グループ`;visual.append(more);}
+  if(q.r){const rem=document.createElement('span');rem.className='visual-group';rem.textContent=`あまり ${'●'.repeat(Math.min(q.r,8))}`;visual.append(rem);}
+  $('supportText').textContent=q.kind==='equal'?`${q.n}こを${q.d}人に同じ数ずつ分けるイメージ。`:q.kind==='group'||q.kind==='remain'?`${q.d}こずつのまとまりを作るイメージ。`:`「${q.d}のだん」で${q.n}になるところを探そう。`;
+});
+$('seeTown').addEventListener('click',()=>{
+  if(view!=='result') return;
+  home();
+  const town=document.querySelector('.town'); town.classList.remove('town-flash'); void town.offsetWidth; town.classList.add('town-flash');
+  town.scrollIntoView({behavior:'smooth',block:'start'});
+});
+$('quit').addEventListener('click',home);$('stageBtn').addEventListener('click',home);
+$('again').addEventListener('click',()=>{if(view==='result'&&round) start(round.course);});
+renderRecords();$('startup').hidden=true;
+
+})();
+</script>
+</body>
+</html>
